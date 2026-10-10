@@ -1,0 +1,623 @@
+/* ==========================================================================
+   AURA BANK - MATTE BLACK & COOL MINIMALIST DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Matte Black & Cool Obsidian Charcoal */
+  --bg-pitch: #07080a;
+  --bg-deep: #0b0c10;
+  --bg-surface-1: #111318;
+  --bg-surface-2: #161920;
+  --bg-surface-3: #1c202a;
+  --bg-glass: rgba(15, 17, 23, 0.75);
+  --bg-glass-card: rgba(17, 19, 26, 0.65);
+  --bg-glass-hover: rgba(255, 255, 255, 0.04);
+
+  /* Subtle Matte Borders & Titanium Frost Edges */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.11);
+  --border-highlight: rgba(148, 163, 184, 0.25);
+  --border-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+
+  /* Cool Tones Palette (Colores Fríos Minimalistas) */
+  --cool-cyan: #38bdf8;          /* Glacier Ice Blue */
+  --cool-cyan-glow: rgba(56, 189, 248, 0.22);
+  --cool-teal: #2dd4bf;          /* Arctic Mint (Rendimiento positivo & verificado) */
+  --cool-teal-glow: rgba(45, 212, 191, 0.18);
+  --cool-indigo: #818cf8;        /* Cold Indigo */
+  --cool-indigo-glow: rgba(129, 140, 248, 0.2);
+  --cool-steel: #94a3b8;         /* Brushed Steel */
+  --cool-slate: #64748b;         /* Muted Slate */
+  --cool-frost: #cbd5e1;         /* Frost Silver */
+  --cool-ice-white: #f1f5f9;
+
+  /* Aliases for compatibility */
+  --apple-blue: var(--cool-cyan);
+  --apple-blue-glow: var(--cool-cyan-glow);
+  --apple-green: var(--cool-teal);
+  --apple-green-glow: var(--cool-teal-glow);
+  --apple-purple: var(--cool-indigo);
+  --apple-purple-glow: var(--cool-indigo-glow);
+  --apple-orange: var(--cool-steel);
+  --apple-red: #f87171;
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-muted: #475569;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, sans-serif;
+  --font-mono: "SF Mono", "Consolas", "Monaco", monospace;
+
+  /* Soft Matte Shadows */
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  --shadow-glow-blue: 0 0 35px var(--cool-cyan-glow);
+  --shadow-glow-green: 0 0 35px var(--cool-teal-glow);
+
+  /* Radius (Apple Squircles) */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background-color: var(--bg-pitch);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #11141c 0%, #090a0d 50%, #050608 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-pitch);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Ambient Background Lights - Subtle Glacier Frost Glow */
+.ambient-glow {
+  position: fixed;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 380px;
+  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.04) 0%, rgba(129, 140, 248, 0.015) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* App Container */
+.app-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 60px 24px;
+}
+
+/* ==========================================================================
+   HEADER & TOP BAR
+   ========================================================================== */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-bottom: 24px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #1c1d24, #0b0c10);
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.brand-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--apple-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* User & Controls in Header */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Currency Global Pill Toggle */
+.currency-selector-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+
+.currency-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-apple);
+}
+
+.currency-btn:hover {
+  color: var(--text-primary);
+}
+
+.currency-btn.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* User Profile Badge */
+.user-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px 5px 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-apple);
+}
+
+.user-profile-badge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-medium);
+}
+
+.avatar-ring {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2c3e50, #000000);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.user-status {
+  font-size: 0.65rem;
+  color: var(--cool-teal);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-status::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cool-teal);
+  box-shadow: 0 0 6px var(--cool-teal);
+}
+
+/* ==========================================================================
+   DYNAMIC ISLAND (Apple Style)
+   ========================================================================== */
+
+.dynamic-island-container {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  pointer-events: auto;
+}
+
+.dynamic-island {
+  height: 38px;
+  min-width: 180px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.45s var(--ease-spring);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.dynamic-island:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: scale(1.02);
+}
+
+.dynamic-island.expanded {
+  min-width: 380px;
+  height: 64px;
+  padding: 0 20px;
+  border-radius: 32px;
+  border-color: var(--cool-cyan);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), var(--shadow-glow-blue);
+}
+
+.island-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.island-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--cool-teal);
+}
+
+.island-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.island-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.island-sub {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  display: none;
+}
+
+.dynamic-island.expanded .island-sub {
+  display: block;
+}
+
+.island-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--cool-teal);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   LIVE FX TICKER BAR (Tipo de Cambio Banxico)
+   ========================================================================== */
+
+.fx-ticker-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  margin-bottom: 24px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(12px);
+}
+
+.ticker-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cool-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cool-teal);
+  box-shadow: 0 0 8px var(--cool-teal);
+  animation: pulseCoolTeal 2s infinite;
+}
+
+@keyframes pulseCoolTeal {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.ticker-text {
+  color: var(--text-secondary);
+}
+
+.ticker-rate-badge {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+.ticker-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.ticker-right span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   GRID LAYOUT PRINCIPAL
+   ========================================================================== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 410px;
+  gap: 28px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left & Right Main Sections */
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Section Card Base */
+.glass-panel {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.3s var(--ease-apple);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--apple-blue);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.panel-action-btn:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Utility icons inside panels */
+.icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.icon-box svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Mobile & iPhone screen responsiveness */
+@media (max-width: 768px) {
+  .app-layout {
+    padding: 0 16px 80px 16px;
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .dynamic-island.expanded {
+    min-width: 90vw;
+  }
+
+  .main-balance-text {
+    font-size: 2.4rem;
+  }
+
+  .fx-ticker-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ticker-right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .main-balance-text {
+    font-size: 2.1rem;
+  }
+
+  .balance-hero {
+    padding: 22px 18px;
+  }
+
+  .card-action-button {
+    padding: 10px 12px;
+  }
+}
