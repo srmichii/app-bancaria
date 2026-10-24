@@ -1,809 +1,947 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MIAUBANK | Banca Privada Digital</title>
-  
-  <!-- Estilos del Sistema Apple Black -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/cards.css">
-  <link rel="stylesheet" href="css/components.css">
-
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z'/></svg>">
+  <title>EDGERUNNER FREIGHT™ // Logística de Alta Velocidad Night City</title>
+  <meta name="description" content="Plataforma de transporte de carga y logística estilo Cyberpunk: Edgerunners en Night City. Velocidad Sandevistan, blindaje corporativo y diseño limpio Apple.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fcee0a'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>">
 </head>
 <body>
 
-  <!-- Luz Ambiental de Fondo -->
-  <div class="ambient-glow"></div>
+  <!-- Real Night City Skyline Backdrop -->
+  <div class="night-city-backdrop"></div>
+  <div class="night-city-vignette"></div>
 
-  <!-- Dynamic Island (Estilo iPhone 15/16 Pro) -->
-  <div class="dynamic-island-container">
-    <div class="dynamic-island" id="dynamicIsland">
-      <div class="island-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
-        </svg>
-      </div>
-      <div class="island-content">
-        <span class="island-title" id="islandTitle">MIAUBANK Private</span>
-        <span class="island-sub" id="islandSub">Banca Digital Protegida</span>
-      </div>
-      <span class="island-badge" id="islandBadge">ACTIVO</span>
-    </div>
-  </div>
+  <!-- Top Edgerunners Hazard Accent Strip (Lucy Cyan & Magenta) -->
+  <div class="edgerunner-hazard-strip"></div>
 
-  <div class="app-layout">
+  <!-- Ambient Network Particle Canvas (Cyan, Magenta & Lavender Particles) -->
+  <canvas id="canvas-network"></canvas>
 
-    <!-- Header Principal -->
-    <header class="app-header">
-      <div class="brand-wrapper" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <div class="brand-icon">
-          <!-- Silueta Minimalista de Cara de Gato -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
+  <!-- ==========================================================================
+       FLOATING APPLE FROSTED NAVIGATION (LUCY CYBERPUNK PALETTE)
+       ========================================================================== -->
+  <div class="nav-floating-container">
+    <nav class="nav-frosted-bar">
+      <!-- Brand Logo -->
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
           </svg>
         </div>
-        <div class="brand-info">
-          <span class="brand-name">MIAUBANK</span>
-          <span class="brand-tag">Banca Privada</span>
-        </div>
-      </div>
+        <span>LUCY<span style="color: var(--lucy-cyan);">FREIGHT</span></span>
+      </a>
 
-      <!-- Selector Global de Divisas -->
-      <div class="header-actions">
-        <div class="currency-selector-pill">
-          <button class="currency-btn active" data-currency="MXN" onclick="CurrencyEngine.setDisplayMode('MXN')">MXN ($)</button>
-          <button class="currency-btn" data-currency="USD" onclick="CurrencyEngine.setDisplayMode('USD')">USD ($)</button>
-          <button class="currency-btn" data-currency="DUAL" onclick="CurrencyEngine.setDisplayMode('DUAL')">Dual</button>
+      <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a href="#vehiculos" class="nav-link">Vehículos Futuristas</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#rastreo" class="nav-link">Rastreo HUD</a></li>
+        <li><a href="#cotizador" class="nav-link">Cotizador (MXN/USD)</a></li>
+        <li><a href="#red-global" class="nav-link">Mapa Night City</a></li>
+      </ul>
+
+      <!-- Right Controls: Currency, Status & Audio & CTA -->
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- Apple-Style Currency Switcher -->
+        <div class="segmented-control currency-switcher" style="padding: 2px;">
+          <button class="segment-btn currency-btn active" data-currency="MXN" style="padding: 6px 12px; font-size: 0.78rem; font-weight: 700;">🇲🇽 MXN</button>
+          <button class="segment-btn currency-btn" data-currency="USD" style="padding: 6px 12px; font-size: 0.78rem; font-weight: 700;">🇺🇸 USD</button>
         </div>
 
-        <!-- Perfil del Usuario -->
-        <div class="user-profile-badge" title="Cuenta Verificada">
-          <div class="avatar-ring">AT</div>
-          <div class="user-meta">
-            <span class="user-name">Alejandro Tapia</span>
-            <span class="user-status">Face ID Verificado</span>
-          </div>
-        </div>
-      </div>
-    </header>
+        <!-- Audio Synth Toggle -->
+        <button id="btn-toggle-sound" class="audio-toggle-btn" title="Activar/Silenciar Audio Cyberpunk" aria-label="Audio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
 
-    <!-- Barra de Tipo de Cambio en Vivo -->
-    <div class="fx-ticker-bar">
-      <div class="ticker-left">
-        <span class="live-indicator">
+        <!-- Status Chip -->
+        <div class="badge-neon badge-cyan" style="display: none; @media(min-width: 900px){ display: inline-flex; }">
           <span class="pulse-dot"></span>
-          EN VIVO
-        </span>
-        <span class="ticker-text">Tipo de Cambio Fix Banxico:</span>
-        <span class="ticker-rate-badge" id="fxTickerRate">$1 USD = $17.85 MXN</span>
+          <span>3,077 EN TRÁNSITO</span>
+        </div>
+
+        <!-- Auth Log In Button -->
+        <a href="#" id="btn-nav-auth" class="btn-cyber-secondary" style="padding: 9px 20px; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span id="btn-nav-auth-text">NET LOG-IN</span>
+        </a>
+
+        <!-- Action CTA -->
+        <a href="#cotizador" class="btn-cyber-primary" style="padding: 9px 20px; font-size: 0.88rem;">
+          <span>Cotizar Despacho</span>
+        </a>
       </div>
-      <div class="ticker-right">
-        <span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          Protección IPAB hasta 400,000 UDIS
-        </span>
-        <span>·</span>
-        <span>SPEI Conexión Directa 24/7</span>
-      </div>
-    </div>
-
-    <!-- Grid Principal de la Banca -->
-    <main class="dashboard-grid">
-
-      <!-- COLUMNA IZQUIERDA: Balance, Acciones, Apartados y Movimientos -->
-      <div class="main-column">
-
-        <!-- Tarjeta de Saldo Principal -->
-        <section class="balance-hero">
-          <div class="balance-header-row">
-            <span class="balance-meta-tag">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
-              Patrimonio Disponible
-            </span>
-
-            <button class="privacy-toggle-btn" onclick="CurrencyEngine.toggleBalanceVisibility()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-              <span id="privacyBtnText">Ocultar</span>
-            </button>
-          </div>
-
-          <div class="balance-amount-display">
-            <h1 class="main-balance-text" id="mainBalanceAmount">$184,520.50</h1>
-            <span class="currency-code-tag" id="mainCurrencyCode">MXN</span>
-          </div>
-
-          <div class="secondary-balance-row">
-            <span>En dólares:</span>
-            <span class="secondary-balance-value" id="secondaryBalanceAmount">$9,850.00</span>
-            <span id="secondaryCurrencyCode">USD</span>
-            <button class="currency-swap-pill" onclick="App.openModal('fxModal')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"/>
-              </svg>
-              Cambiar
-            </button>
-          </div>
-
-          <!-- Tira de Rendimiento Anual -->
-          <div class="balance-yield-strip">
-            <div class="yield-info-left">
-              <div class="yield-icon-box">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                  <polyline points="17 6 23 6 23 12"/>
-                </svg>
-              </div>
-              <div>
-                <div class="yield-text-main">Rendimiento Cuentas a la Vista</div>
-                <div class="yield-text-sub" id="dailyYieldAmount">+ $72.03 MXN generados hoy</div>
-              </div>
-            </div>
-            <div class="yield-rate-badge">14.25% ANUAL</div>
-          </div>
-        </section>
-
-        <!-- Barra de Acciones Rápidas -->
-        <section class="quick-actions-grid">
-          <button class="quick-action-btn" onclick="App.openModal('transferModal')">
-            <div class="action-icon-wrapper blue">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </div>
-            <span class="action-title">Transferir (SPEI)</span>
-          </button>
-
-          <button class="quick-action-btn" onclick="App.openModal('depositModal')">
-            <div class="action-icon-wrapper green">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-            </div>
-            <span class="action-title">Ingresar Dinero</span>
-          </button>
-
-          <button class="quick-action-btn" onclick="App.openModal('fxModal')">
-            <div class="action-icon-wrapper purple">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                <path d="M3 3v5h5"/>
-                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
-                <path d="M16 21h5v-5"/>
-              </svg>
-            </div>
-            <span class="action-title">Cambiar MXN / USD</span>
-          </button>
-
-          <button class="quick-action-btn" onclick="App.openModal('servicesModal')">
-            <div class="action-icon-wrapper orange">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <path d="M7 15h0M2 9.5h20"/>
-              </svg>
-            </div>
-            <span class="action-title">Pagar Servicios</span>
-          </button>
-        </section>
-
-        <!-- Bóveda de Apartados y Ahorro -->
-        <section class="glass-panel">
-          <div class="panel-header">
-            <h2 class="panel-title">
-              <div class="icon-box">🎯</div>
-              Bóvedas de Ahorro y Metas
-            </h2>
-            <button class="panel-action-btn" onclick="App.depositToVault('Fondo Emergencia', 1000)">
-              + Agregar $1,000 MXN
-            </button>
-          </div>
-
-          <div class="vaults-grid">
-            <div class="vault-card" onclick="App.depositToVault('Fondo Emergencia', 2000)">
-              <div class="vault-top">
-                <div class="vault-title-wrap">
-                  <span class="vault-emoji">🛡️</span>
-                  <span class="vault-name">Fondo de Emergencia</span>
-                </div>
-                <span class="vault-badge">14.25% Rend.</span>
-              </div>
-              <div class="vault-balance-info">
-                <span class="vault-current-amount">$65,000 MXN</span>
-                <span class="vault-goal-amount">Meta: $100,000</span>
-              </div>
-              <div class="vault-progress-track">
-                <div class="vault-progress-bar" style="width: 65%;"></div>
-              </div>
-            </div>
-
-            <div class="vault-card" onclick="App.depositToVault('Viaje a Tokio', 1500)">
-              <div class="vault-top">
-                <div class="vault-title-wrap">
-                  <span class="vault-emoji">🇯🇵</span>
-                  <span class="vault-name">Viaje a Tokio 2027</span>
-                </div>
-                <span class="vault-badge">En Dólares</span>
-              </div>
-              <div class="vault-balance-info">
-                <span class="vault-current-amount">$3,200 USD</span>
-                <span class="vault-goal-amount">Meta: $5,000</span>
-              </div>
-              <div class="vault-progress-track">
-                <div class="vault-progress-bar" style="width: 64%;"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Movimientos Recientes -->
-        <section class="glass-panel">
-          <div class="panel-header">
-            <h2 class="panel-title">
-              <div class="icon-box">📊</div>
-              Movimientos Recientes
-            </h2>
-          </div>
-
-          <!-- Filtros de Transacciones -->
-          <div class="tx-filters-bar">
-            <div class="filter-pills">
-              <button class="tx-filter-btn active" data-filter="ALL" onclick="TransactionsEngine.setFilter('ALL')">Todas</button>
-              <button class="tx-filter-btn" data-filter="MXN" onclick="TransactionsEngine.setFilter('MXN')">Pesos (MXN)</button>
-              <button class="tx-filter-btn" data-filter="USD" onclick="TransactionsEngine.setFilter('USD')">Dólares (USD)</button>
-              <button class="tx-filter-btn" data-filter="INCOME" onclick="TransactionsEngine.setFilter('INCOME')">Ingresos</button>
-              <button class="tx-filter-btn" data-filter="EXPENSE" onclick="TransactionsEngine.setFilter('EXPENSE')">Gastos</button>
-            </div>
-            <span style="font-size: 0.75rem; color: var(--text-secondary);">Toca un movimiento para ver comprobante CEP</span>
-          </div>
-
-          <!-- Lista de Transacciones Renderizada -->
-          <div class="tx-list-container" id="transactionsList">
-            <!-- Rellenado por transactions.js -->
-          </div>
-        </section>
-
-      </div>
-
-      <!-- COLUMNA DERECHA: Tarjeta Apple Card 3D, Seguridad y Métricas -->
-      <aside class="sidebar-column">
-
-        <!-- Módulo de Tarjetas Interactivas Apple Card -->
-        <section class="glass-panel cards-section-container">
-          <div class="panel-header" style="margin-bottom: 8px;">
-            <h2 class="panel-title">
-              <div class="icon-box">💳</div>
-              Mis Tarjetas
-            </h2>
-          </div>
-
-          <!-- Pestañas Física / Virtual -->
-          <div class="card-type-tabs">
-            <button class="card-tab-btn active" data-card-type="physical" onclick="CardSecurityEngine.switchCard('physical')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="5" width="20" height="14" rx="2"/>
-                <line x1="2" y1="10" x2="22" y2="10"/>
-              </svg>
-              Titanium Black
-            </button>
-            <button class="card-tab-btn" data-card-type="virtual" onclick="CardSecurityEngine.switchCard('virtual')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 3a9 9 0 0 1 9 9"/>
-              </svg>
-              Aurora Virtual
-            </button>
-          </div>
-
-          <!-- Escenario 3D de la Tarjeta Apple -->
-          <div class="card-perspective-wrapper" id="cardPerspectiveWrapper">
-            <div class="apple-card titanium-black" id="mainAppleCard" onclick="CardSecurityEngine.requestRevealDetails()">
-              
-              <!-- Reflejo Holográfico (Sheen) -->
-              <div class="card-glare"></div>
-
-              <!-- Contenido de la Tarjeta -->
-              <div class="card-content">
-                <div class="card-top-row">
-                  <div class="card-bank-mark">
-                    <span class="card-aura-logo">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;">
-                        <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
-                      </svg>
-                      MIAUBANK
-                    </span>
-                    <span class="card-tier-label" id="cardTierLabel">Private Banking</span>
-                  </div>
-                  <div class="card-nfc-chip">
-                    <div class="contactless-wave">
-                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M8.5 16.5a5 5 0 0 1 0-7"/>
-                        <path d="M12 19a8.5 8.5 0 0 0 0-14"/>
-                        <path d="M15.5 21.5a12 12 0 0 0 0-19"/>
-                      </svg>
-                    </div>
-                    <div class="emv-chip"></div>
-                  </div>
-                </div>
-
-                <div class="card-number-row" id="cardNumberDisplay">
-                  <div class="card-number-hidden">
-                    <span class="number-dots">•••• •••• ••••</span>
-                    <span class="number-last4">7890</span>
-                  </div>
-                </div>
-
-                <div class="card-bottom-row">
-                  <div class="card-holder-group">
-                    <span class="card-label-tiny">Titular</span>
-                    <span class="card-holder-name" id="cardHolderName">ALEJANDRO TAPIA</span>
-                  </div>
-
-                  <div class="card-security-meta">
-                    <div class="card-expiry-box">
-                      <span class="card-label-tiny">Expira</span>
-                      <span class="card-meta-value" id="cardExpiryValue">••/••</span>
-                    </div>
-
-                    <div class="card-cvv-box">
-                      <span class="card-label-tiny">CVV</span>
-                      <span class="card-meta-value" id="cardCvvValue">•••</span>
-                    </div>
-
-                    <div class="card-network-logo">
-                      <div class="mastercard-circles">
-                        <div class="mc-circle-red"></div>
-                        <div class="mc-circle-yellow"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Controles de la Tarjeta -->
-          <div class="card-controls-panel">
-            <button class="card-action-button" onclick="CardSecurityEngine.requestRevealDetails()">
-              <div class="card-action-info">
-                <div class="action-icon-circle">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </div>
-                <div class="action-text-group">
-                  <span class="action-main-text" id="revealDetailsBtnText">Ver datos y CVV</span>
-                  <span class="action-sub-text" id="cardCvvTimer">Protegido Face ID</span>
-                </div>
-              </div>
-            </button>
-
-            <div class="card-action-button" onclick="CardSecurityEngine.toggleLockCard()">
-              <div class="card-action-info">
-                <div class="action-icon-circle">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                  </svg>
-                </div>
-                <div class="action-text-group">
-                  <span class="action-main-text">Congelar</span>
-                  <span class="action-sub-text">Bloqueo al instante</span>
-                </div>
-              </div>
-              <label class="ios-switch" onclick="event.stopPropagation()">
-                <input type="checkbox" id="cardLockSwitch" onchange="CardSecurityEngine.toggleLockCard()">
-                <span class="ios-slider"></span>
-              </label>
-            </div>
-          </div>
-
-          <!-- CLABE Interbancaria con Copiado en un Clic -->
-          <div class="clabe-box" onclick="CardSecurityEngine.copyCLABE()">
-            <div class="clabe-info">
-              <span class="clabe-title">CLABE Interbancaria (SPEI México)</span>
-              <span class="clabe-digits">646 180 1570 2394 8123</span>
-            </div>
-            <div class="clabe-copy-tag">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              Copiar
-            </div>
-          </div>
-
-          <!-- Copiar Número de Tarjeta -->
-          <div class="clabe-box" style="margin-top: -8px;" onclick="CardSecurityEngine.copyCardNumber()">
-            <div class="clabe-info">
-              <span class="clabe-title">Número de Tarjeta Frecuente</span>
-              <span class="clabe-digits">4829 •••• •••• 7890</span>
-            </div>
-            <div class="clabe-copy-tag">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              Copiar
-            </div>
-          </div>
-        </section>
-
-        <!-- Distribución de Gastos (Estilo Apple Wallet) -->
-        <section class="glass-panel">
-          <div class="panel-header">
-            <h2 class="panel-title">
-              <div class="icon-box">📈</div>
-              Gastos del Mes
-            </h2>
-            <span style="font-size: 0.8rem; color: var(--apple-blue); font-weight: 600;">Octubre 2026</span>
-          </div>
-
-          <div style="margin-bottom: 14px;">
-            <div style="font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;">$4,288.50 <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 600;">MXN</span></div>
-            <div style="font-size: 0.8rem; color: var(--text-secondary);">+ $124.50 USD en suscripciones internacionales</div>
-          </div>
-
-          <!-- Barra de Segmentos Wallet (Colores Fríos Minimalistas) -->
-          <div style="height: 8px; display: flex; gap: 4px; border-radius: 6px; overflow: hidden; margin-bottom: 16px;">
-            <div style="width: 42%; background: var(--cool-cyan); border-radius: 4px;" title="Servicios y Cloud (42%)"></div>
-            <div style="width: 28%; background: var(--cool-indigo); border-radius: 4px;" title="Transferencias (28%)"></div>
-            <div style="width: 18%; background: var(--cool-steel); border-radius: 4px;" title="Alimentos (18%)"></div>
-            <div style="width: 12%; background: var(--cool-teal); border-radius: 4px;" title="Otros (12%)"></div>
-          </div>
-
-          <!-- Leyendas de Categorías -->
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.78rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-cyan);"></span>
-                Servicios Cloud & Tech
-              </span>
-              <span style="font-weight: 600; color: #fff;">$124.50 USD</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-indigo);"></span>
-                Transferencias Familia/Amigos
-              </span>
-              <span style="font-weight: 600; color: #fff;">$1,850.00 MXN</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-steel);"></span>
-                Entretenimiento y Servicios
-              </span>
-              <span style="font-weight: 600; color: #fff;">$449.00 MXN</span>
-            </div>
-          </div>
-        </section>
-
-      </aside>
-
-    </main>
-
+    </nav>
   </div>
 
-  <!-- ======================================================================
-       MODALES INTERACTIVOS
-       ====================================================================== -->
-
-  <!-- MODAL: TRANSFERENCIA SPEI -->
-  <div class="modal-overlay" id="transferModal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" onclick="App.closeModal('transferModal')">✕</button>
+  <!-- ==========================================================================
+       HERO SECTION: APPLE MINIMALISM + LUCY CYBERPUNK VIBE
+       ========================================================================== -->
+  <section class="hero-section">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
       
-      <h3 class="modal-title">Transferencia SPEI</h3>
-      <p class="modal-subtitle">Envío interbancario instantáneo 24/7 sin comisión</p>
-
-      <form id="transferForm" onsubmit="App.handleTransferSubmit(event)">
-
-        <!-- Contactos Rápidos -->
-        <div class="form-group">
-          <label class="form-label">Contactos Frecuentes</label>
-          <div class="frequent-contacts-scroll" id="quickContactsList">
-            <!-- Inyectado por app.js -->
-          </div>
-        </div>
-
-        <!-- Selector de Moneda de Envío -->
-        <div class="form-group">
-          <label class="form-label">Moneda de Envío</label>
-          <div class="currency-segmented-control">
-            <label class="seg-btn active">
-              <input type="radio" name="transferCurrency" value="MXN" checked style="display:none;" onchange="this.parentElement.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); this.parentElement.classList.add('active');">
-              Pesos Mexicanos (MXN)
-            </label>
-            <label class="seg-btn">
-              <input type="radio" name="transferCurrency" value="USD" style="display:none;" onchange="this.parentElement.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); this.parentElement.classList.add('active');">
-              Dólares (USD Wire)
-            </label>
-          </div>
-        </div>
-
-        <!-- Monto -->
-        <div class="form-group">
-          <label class="form-label">Monto a Transferir</label>
-          <div class="amount-input-wrapper">
-            <span class="amount-currency-symbol">$</span>
-            <input type="number" step="0.01" min="1" id="transferAmount" class="form-input amount-input-field" placeholder="0.00" required>
-          </div>
-        </div>
-
-        <!-- Destinatario / CLABE -->
-        <div class="form-group">
-          <label class="form-label">CLABE (18 dígitos) o Tarjeta Débito</label>
-          <input type="text" id="transferDestination" class="form-input" placeholder="Ej. 012180015582910482" required maxlength="18">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="form-group">
-            <label class="form-label">Nombre del Titular</label>
-            <input type="text" id="transferBeneficiaryName" class="form-input" placeholder="Nombre completo" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Banco Receptor</label>
-            <input type="text" id="transferBankName" class="form-input" placeholder="BBVA, Banorte, Nu, etc." required>
-          </div>
-        </div>
-
-        <!-- Concepto -->
-        <div class="form-group">
-          <label class="form-label">Concepto de Pago</label>
-          <input type="text" id="transferConcept" class="form-input" placeholder="Ej. Pago de renta, cena, etc." required>
-        </div>
-
-        <button type="submit" class="btn-primary-ios">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="7" y1="17" x2="17" y2="7"/>
-            <polyline points="7 7 17 7 17 17"/>
-          </svg>
-          Confirmar y Enviar SPEI
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: INGRESAR DINERO / DATOS DE CUENTA -->
-  <div class="modal-overlay" id="depositModal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" onclick="App.closeModal('depositModal')">✕</button>
-
-      <h3 class="modal-title">Ingresar Fondos</h3>
-      <p class="modal-subtitle">Transfiere desde cualquier banco mexicano o deposita en efectivo</p>
-
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div class="clabe-box" onclick="CardSecurityEngine.copyCLABE()">
-          <div class="clabe-info">
-            <span class="clabe-title">CLABE SPEI Personal</span>
-            <span class="clabe-digits">646 180 1570 2394 8123</span>
-            <span style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">Banco Receptor: STP / MIAUBANK · Titular: Alejandro Tapia</span>
-          </div>
-          <div class="clabe-copy-tag">Copiar</div>
-        </div>
-
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; text-align: center;">
-          <div style="font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: #fff;">Depósito en Efectivo OXXO Pay</div>
-          <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 12px;">Muestra este código de barras en caja de cualquier OXXO</div>
-          <div style="font-family: var(--font-mono); font-size: 1.3rem; letter-spacing: 0.15em; font-weight: 800; color: var(--apple-blue); background: rgba(10, 132, 255, 0.1); padding: 10px; border-radius: 8px; border: 1px dashed var(--apple-blue);">
-            9384 1029 4812 0041
-          </div>
-          <div style="font-size: 0.68rem; color: var(--text-tertiary); margin-top: 8px;">Acreditación inmediata · Comisión OXXO $15 MXN</div>
-        </div>
-
-        <button type="button" class="btn-primary-ios" onclick="App.closeModal('depositModal')">
-          Entendido
-        </button>
+      <!-- High-Tech Badge Pill -->
+      <div class="hero-pill">
+        <span class="pulse-dot"></span>
+        <span>LUCY NETRUNNER LOGISTICS // PROTOCOLO NIGHT CITY 2077</span>
       </div>
+
+      <!-- Main Headline with Gradient -->
+      <h1 class="hero-title">
+        Transporte de mercancía <br>
+        <span class="text-gradient-lucy">con el pulso y sigilo de Lucy.</span>
+      </h1>
+
+      <!-- Friendly & Informative Subtitle -->
+      <p class="hero-subtitle">
+        Flotas terrestres acorazadas, aerodinos AV-4 de carga suborbital y ciber-camiones pesados en Night City. Máxima seguridad con cifrado Black ICE y la experiencia de uso limpia, fluida y amigable de Apple.
+      </p>
+
+      <!-- Dual Primary CTAs -->
+      <div class="hero-actions">
+        <a href="#cotizador" class="btn-cyber-primary">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span>Calcular Flete en Night City</span>
+        </a>
+
+        <a href="#rastreo" class="btn-cyber-secondary">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 14 14"></polyline>
+          </svg>
+          <span>Rastreo de Carga en Vivo</span>
+        </a>
+      </div>
+
+      <!-- Quick Interactive Tracking Dock -->
+      <div class="tracking-quick-dock" id="rastreo">
+        <div class="tracking-input-wrapper">
+          <div class="tracking-input-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="tracking-code-input" 
+            class="tracking-input" 
+            placeholder="Ingresa guía de Night City (ej. SANDEV-2077-NC)"
+            value="SANDEV-2077-NC"
+          />
+          <button id="btn-track-submit" class="btn-cyber-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+            <span>Localizar Carga</span>
+          </button>
+        </div>
+
+        <!-- Sample Quick Track Codes -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; flex-wrap: wrap;">
+          <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">Despachos activos:</span>
+          <button class="sample-code-pill segment-btn" data-code="SANDEV-2077-NC">⚡ SANDEV-2077-NC (David Martinez)</button>
+          <button class="sample-code-pill segment-btn" data-code="LUCY-CYBER-88">🌙 LUCY-CYBER-88 (Deep-Net Crio)</button>
+          <button class="sample-code-pill segment-btn" data-code="MAINE-TITAN-01">🛡️ MAINE-TITAN-01 (Blindado Badlands)</button>
+        </div>
+
+        <!-- Tracking Results Card (HUD View) -->
+        <div id="tracking-results-card" class="tracking-results-card">
+          <div class="tracking-header-grid">
+            <div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+                <span class="badge-neon badge-cyan">TELEMETRÍA EN TIEMPO REAL</span>
+                <span class="badge-neon badge-pink"><span class="pulse-dot"></span> RED NETRUNNER ACTIVA</span>
+              </div>
+              <h2 id="track-view-id" class="tracking-id-text text-gradient-cyan">SANDEV-2077-NC</h2>
+              <p id="track-view-cargo" style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 4px;">Unidades Sandevistan Militar Militech v4 • David Martinez Crew</p>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Tiempo Estimado de Entrega</div>
+              <div id="track-view-eta" style="font-size: 1.35rem; font-weight: 800; color: var(--lucy-cyan); font-family: var(--font-mono); margin-top: 2px;">En 18 Minutos</div>
+              <div style="font-size: 0.82rem; color: #fff; margin-top: 2px;">
+                <span id="track-view-origin">Santo Domingo</span> ➔ <span id="track-view-dest">City Center</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Freight Timeline -->
+          <div class="freight-timeline" id="track-timeline-container">
+            <!-- Rendered by app.js -->
+          </div>
+
+          <!-- Telemetry Data Chips -->
+          <div class="tracking-telemetry-grid">
+            <div class="telemetry-chip">
+              <div class="chip-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ubicación Actual
+              </div>
+              <div id="track-chip-location" class="chip-val">Heywood 101 Norte</div>
+            </div>
+
+            <div class="telemetry-chip">
+              <div class="chip-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                Velocidad Sandevistan
+              </div>
+              <div id="track-chip-speed" class="chip-val" style="color: var(--lucy-cyan);">168 km/h</div>
+            </div>
+
+            <div class="telemetry-chip">
+              <div class="chip-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                Temperatura Contenedor
+              </div>
+              <div id="track-chip-temp" class="chip-val">18.0°C</div>
+            </div>
+
+            <div class="telemetry-chip">
+              <div class="chip-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Sello Criptográfico ICE
+              </div>
+              <div id="track-chip-seal" class="chip-val" style="font-size: 0.85rem; color: var(--lucy-pink);">EDGERUNNER-ICE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Night City Telemetry HUD Bar -->
+      <div class="telemetry-hud-bar">
+        <div class="telemetry-stat-item">
+          <div class="telemetry-value" data-target="3077" data-prefix="" data-suffix="">3,077</div>
+          <div class="telemetry-label">Convoys en Night City</div>
+        </div>
+        <div class="telemetry-stat-item">
+          <div class="telemetry-value" data-target="99.9" data-prefix="" data-suffix="%">99.9%</div>
+          <div class="telemetry-label">Puntualidad Sandevistan</div>
+        </div>
+        <div class="telemetry-stat-item">
+          <div class="telemetry-value" data-target="15" data-prefix="< " data-suffix=" min">&lt; 15 min</div>
+          <div class="telemetry-label">Tiempo Promedio Entre Distritos</div>
+        </div>
+        <div class="telemetry-stat-item">
+          <div class="telemetry-value" data-target="100" data-prefix="" data-suffix="%">100%</div>
+          <div class="telemetry-label">Custodia y Blindaje Nivel 6</div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
 
-  <!-- MODAL: CAMBIO DE DIVISAS (FX MXN <-> USD) -->
-  <div class="modal-overlay" id="fxModal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" onclick="App.closeModal('fxModal')">✕</button>
+  <!-- ==========================================================================
+       SMART QUOTE CALCULATOR: NIGHT CITY CORRIDORS (MXN / USD)
+       ========================================================================== -->
+  <section class="section-container" id="cotizador">
+    <div class="section-header">
+      <span class="section-tag">// ESTIMADOR EN PESOS MEXICANOS & DÓLARES</span>
+      <h2 class="section-heading">Cotiza tu despacho en MXN o USD.</h2>
+      <p class="section-description">
+        Tarifas transparentes calculadas en tiempo real. Selecciona entre Pesos Mexicanos o Dólares Americanos según las necesidades de tu empresa.
+      </p>
+    </div>
 
-      <h3 class="modal-title">Cambio de Divisas</h3>
-      <p class="modal-subtitle">Conversión instantánea entre tus cuentas en MXN y USD</p>
-
-      <form id="fxForm" onsubmit="App.handleFXSubmit(event)">
-        
-        <!-- De (Origen) -->
+    <div class="quote-calculator-container">
+      <!-- Calculator Controls -->
+      <div class="calc-form-card">
+        <!-- 1. Cargo Type Selection -->
         <div class="form-group">
-          <label class="form-label" id="fxFromCurrencyLabel">Pesos Mexicanos (MXN)</label>
-          <div class="amount-input-wrapper">
-            <span class="amount-currency-symbol" id="fxFromSymbol">$</span>
-            <input type="number" step="0.01" min="1" id="fxFromAmount" class="form-input amount-input-field" placeholder="10,000.00" required>
+          <label class="form-label">
+            <span>1. Tipo de Mercancía</span>
+            <span class="form-hint">Categoría Night City</span>
+          </label>
+          <div class="cargo-type-grid">
+            <div class="cargo-option-btn selected" data-type="general">
+              <div class="cargo-opt-icon">📦</div>
+              <div class="cargo-opt-info">
+                <h4>Mercancía General</h4>
+                <p>Retail, insumos urbanos y paquetería de distrito.</p>
+              </div>
+            </div>
+
+            <div class="cargo-option-btn" data-type="cold">
+              <div class="cargo-opt-icon">❄️</div>
+              <div class="cargo-opt-info">
+                <h4>Bioware & Crio-Protect</h4>
+                <p>Órganos sintéticos, farmacéuticos Trauma Team spec.</p>
+              </div>
+            </div>
+
+            <div class="cargo-option-btn" data-type="hightech">
+              <div class="cargo-opt-icon">⚡</div>
+              <div class="cargo-opt-info">
+                <h4>Cyberware & Microchips</h4>
+                <p>Sandevistan, ciberimplantes militares Arasaka/Militech.</p>
+              </div>
+            </div>
+
+            <div class="cargo-option-btn" data-type="heavy">
+              <div class="cargo-opt-icon">🛡️</div>
+              <div class="cargo-opt-info">
+                <h4>Blindada & Maquinaria</h4>
+                <p>Armamento pesado, blindaje Nivel 6 y metales raros.</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Botón de Invertir Dirección -->
-        <div style="display: flex; justify-content: center; margin: -6px 0 10px 0;">
-          <button type="button" id="fxSwapDirectionBtn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-medium); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--apple-blue); cursor: pointer; transition: transform 0.3s;" title="Invertir conversión">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"/>
+        <!-- 2. Origin & Destination -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label"><span>Distrito de Origen</span></label>
+            <select id="calc-origin" class="cyber-select">
+              <option value="watson" selected>Watson // Kabuki Market</option>
+              <option value="santo">Santo Domingo // Arroyo</option>
+              <option value="corpo">City Center // Corpo Plaza</option>
+              <option value="westbrook">Westbrook // Japantown</option>
+              <option value="heywood">Heywood // The Glen</option>
+              <option value="pacifica">Pacifica // Coastview</option>
+              <option value="badlands">Badlands // Campamento Nomad</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><span>Distrito Destino</span></label>
+            <select id="calc-destination" class="cyber-select">
+              <option value="corpo" selected>City Center // Corpo Plaza</option>
+              <option value="watson">Watson // Kabuki Market</option>
+              <option value="santo">Santo Domingo // Arroyo</option>
+              <option value="westbrook">Westbrook // Japantown</option>
+              <option value="heywood">Heywood // The Glen</option>
+              <option value="pacifica">Pacifica // Coastview</option>
+              <option value="badlands">Badlands // Campamento Nomad</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 3. Modalidad de Transporte -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>Modo de Despacho</span>
+            <span class="form-hint" id="quote-out-distance">12 km entre distritos</span>
+          </label>
+          <select id="calc-mode" class="cyber-select">
+            <option value="sandy" selected>⚡ Flota Sandevistan Overdrive // Alta Velocidad Terrestre</option>
+            <option value="av">🚀 Aerodino Suborbital AV-4 // Aéreo VIP (< 10 minutos)</option>
+            <option value="armored">🛡️ Convoy Blindado Mackinaw Tier 6 // Escolta Máxima</option>
+          </select>
+        </div>
+
+        <!-- 4. Peso y Volumen -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: center;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">
+              <span>Peso de la Carga</span>
+              <span id="calc-weight-val" style="color: var(--edgerunner-yellow); font-family: var(--font-mono); font-weight: 700;">1,500 kg</span>
+            </label>
+            <input type="range" id="calc-weight" class="cyber-slider" min="50" max="20000" step="50" value="1500">
+            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;">
+              <span>50 kg</span>
+              <span>10,000 kg</span>
+              <span>20,000 kg</span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label"><span>Volumen (m³)</span></label>
+            <input type="number" id="calc-volume" class="cyber-input" min="1" max="80" value="6">
+          </div>
+        </div>
+
+        <!-- Extras Toggles -->
+        <div style="display: flex; gap: 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+            <input type="checkbox" id="calc-extra-insurance" checked style="accent-color: var(--edgerunner-yellow); width: 17px; height: 17px;">
+            <span>Seguro de Cobertura Total contra Emboscadas</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+            <input type="checkbox" id="calc-extra-express" style="accent-color: var(--lucy-pink); width: 17px; height: 17px;">
+            <span>Prioridad Sandevistan Overclock (+30% más rápido)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Quote Live Summary & Booking Trigger -->
+      <div class="quote-summary-card">
+        <div>
+          <div class="summary-header">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="badge-neon badge-cyan">CONTRATO NETRUNNER</span>
+              <!-- Currency Toggle in Card -->
+              <div class="segmented-control currency-switcher" style="padding: 2px;">
+                <button class="segment-btn currency-btn active" data-currency="MXN" style="padding: 4px 10px; font-size: 0.75rem; font-weight: 700;">$ MXN</button>
+                <button class="segment-btn currency-btn" data-currency="USD" style="padding: 4px 10px; font-size: 0.75rem; font-weight: 700;">$ USD</button>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 1.45rem; font-weight: 700; color: #fff;">Resumen del Flete</h3>
+              <span id="rate-badge-info" style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">T.C. $19.80 MXN</span>
+            </div>
+          </div>
+
+          <div class="summary-items-list">
+            <div class="summary-row">
+              <span style="color: var(--text-secondary);">Tarifa Base de Despacho:</span>
+              <span id="quote-out-base" style="color: #fff; font-family: var(--font-mono);">$5,148.00 MXN</span>
+            </div>
+            <div class="summary-row">
+              <span style="color: var(--text-secondary);">Flete & Corredor Distrital:</span>
+              <span id="quote-out-freight" style="color: #fff; font-family: var(--font-mono);">$7,840.80 MXN</span>
+            </div>
+            <div class="summary-row">
+              <span style="color: var(--text-secondary);">Blindaje & Seguro Anti-ICE:</span>
+              <span id="quote-out-extras" style="color: #fff; font-family: var(--font-mono);">$3,316.90 MXN</span>
+            </div>
+            <div class="summary-row">
+              <span style="color: var(--text-secondary);">Tiempo de Arribo Estimado:</span>
+              <span id="quote-out-eta" style="color: var(--lucy-cyan); font-weight: 800; font-family: var(--font-mono);">15 Minutos</span>
+            </div>
+            <div class="summary-row total">
+              <div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Total Estimado</div>
+                <div id="currency-legend-label" style="font-size: 0.75rem; color: var(--text-secondary);">En Pesos Mexicanos (IVA incluido)</div>
+              </div>
+              <div id="quote-out-total" class="total-price">$16,305.70 MXN</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button class="btn-cyber-primary btn-trigger-booking" style="width: 100%; padding: 15px;">
+            <span id="btn-booking-text">Confirmar Despacho en Pesos ($ MXN)</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
-        </div>
-
-        <!-- A (Destino Calculado) -->
-        <div class="form-group">
-          <label class="form-label" id="fxToCurrencyLabel">Dólares Estadounidenses (USD)</label>
-          <div class="amount-input-wrapper">
-            <span class="amount-currency-symbol" id="fxToSymbol">$</span>
-            <input type="text" id="fxToAmount" class="form-input amount-input-field" placeholder="0.00" readonly style="color: var(--apple-green);">
-          </div>
-        </div>
-
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 16px; font-size: 0.78rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-            <span style="color: var(--text-secondary);">Cotización en vivo:</span>
-            <span style="font-weight: 700; color: #fff;" id="fxModalRateInfo">1 USD = $17.85 MXN</span>
-          </div>
-          <div style="display: flex; justify-content: space-between;">
-            <span style="color: var(--text-secondary);">Comisión por operación:</span>
-            <span style="font-weight: 700; color: var(--cool-teal);">0% Gratis (Spread MIAUBANK)</span>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-primary-ios">
-          Confirmar Conversión Instantánea
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: PAGAR SERVICIOS -->
-  <div class="modal-overlay" id="servicesModal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" onclick="App.closeModal('servicesModal')">✕</button>
-
-      <h3 class="modal-title">Pago de Servicios</h3>
-      <p class="modal-subtitle">Liquida recibos oficiales sin filas y con comprobante fiscal</p>
-
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div class="card-action-button" onclick="App.handlePayService('CFE Electricidad', 784.00)">
-          <div class="card-action-info">
-            <div class="action-icon-circle" style="background: rgba(45, 212, 191, 0.12); color: var(--cool-teal);">⚡</div>
-            <div class="action-text-group">
-              <span class="action-main-text">CFE Electricidad</span>
-              <span class="action-sub-text">Recibo bimestral vencimiento próx.</span>
-            </div>
-          </div>
-          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$784.00 MXN</span>
-        </div>
-
-        <div class="card-action-button" onclick="App.handlePayService('Telmex Infinitum', 549.00)">
-          <div class="card-action-info">
-            <div class="action-icon-circle" style="background: rgba(56, 189, 248, 0.12); color: var(--cool-cyan);">🌐</div>
-            <div class="action-text-group">
-              <span class="action-main-text">Telmex Fibra Óptica</span>
-              <span class="action-sub-text">Internet y telefonía</span>
-            </div>
-          </div>
-          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$549.00 MXN</span>
-        </div>
-
-        <div class="card-action-button" onclick="App.handlePayService('Tag Pase / Autopistas', 500.00)">
-          <div class="card-action-info">
-            <div class="action-icon-circle" style="background: rgba(148, 163, 184, 0.12); color: var(--cool-steel);">🚗</div>
-            <div class="action-text-group">
-              <span class="action-main-text">Tag PASE Peajes</span>
-              <span class="action-sub-text">Recarga de saldo para casetas</span>
-            </div>
-          </div>
-          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$500.00 MXN</span>
+          <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+            🔒 Pago protegido con smart-contract neural. Aceptamos transferencias SPEI y tarjetas internacionales.
+          </p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- MODAL: FACE ID HUD SIMULACIÓN -->
-  <div class="modal-overlay" id="faceIdModal">
-    <div class="modal-dialog" style="max-width: 320px; text-align: center; background: rgba(15, 16, 21, 0.95);">
-      <div class="face-id-hud">
-        <div class="face-id-frame">
-          <div class="face-id-bracket"></div>
-          <svg class="face-id-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke-width="2"/>
-            <path d="M9 10h.01M15 10h.01M9 15c1 1 2 1.5 3 1.5s2-.5 3-1.5" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="face-id-status" id="faceIdStatusText">Verificando Face ID...</div>
-      </div>
+  <!-- ==========================================================================
+       FUTURISTIC TRANSPORT VEHICLES SHOWCASE & HANGAR
+       ========================================================================== -->
+  <section class="section-container" id="vehiculos">
+    <div class="section-header">
+      <span class="section-tag">// HANGAR DE FLOTA & VEHÍCULOS FUTURISTAS</span>
+      <h2 class="section-heading">Vehículos pesados y aerodinos de Night City.</h2>
+      <p class="section-description">
+        Diseñados para cruzar los viaductos metropolitanos y el espacio aéreo corporativo con velocidad extrema, blindaje de grafeno y telemetría inspirada en Lucy.
+      </p>
     </div>
-  </div>
 
-  <!-- MODAL: COMPROBANTE OFICIAL CEP SPEI BANXICO -->
-  <div class="modal-overlay" id="speiReceiptModal">
-    <div class="modal-dialog" style="max-width: 520px;">
-      <button class="modal-close-btn" onclick="App.closeModal('speiReceiptModal')">✕</button>
-
-      <div class="spei-receipt-card" id="speiReceiptPrintArea">
-        <div class="spei-receipt-header">
+    <!-- Main Cinematic Vehicle Card with Generated Image -->
+    <div class="vehicle-showcase-card">
+      <img src="assets/futuristic-vehicles.jpg" alt="Vehículos de Transporte Futuristas en Night City" class="vehicle-showcase-img">
+      <div class="vehicle-showcase-overlay">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
           <div>
-            <div class="spei-banxico-logo">BANCO DE MÉXICO · SPEI</div>
-            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 2px;">Comprobante Electrónico (CEP)</div>
+            <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+              <span class="badge-neon badge-cyan">PROPULSIÓN VECTORIAL AV-4</span>
+              <span class="badge-neon badge-pink">BLINDAJE DE GRAFENO N6</span>
+            </div>
+            <h3 style="font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: #fff;">
+              Flota de Transporte Aéreo & Terrestre Pesado
+            </h3>
+            <p style="color: var(--text-secondary); max-width: 680px; font-size: 0.95rem; line-height: 1.5; margin-top: 6px;">
+              Aerodino suborbital Kusanagi AV-4 con sujeción electromagnética de contenedores modulares y supercamión blindado RYO Logistics con propulsión híbrida de iones.
+            </p>
           </div>
-          <span class="spei-status-pill" id="receiptStatus">Liquidado</span>
+          <a href="#cotizador" class="btn-cyber-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+            <span>Solicitar Despacho con esta Flota</span>
+          </a>
         </div>
 
-        <div style="text-align: center; padding: 12px 0; border-bottom: 1px dashed var(--border-subtle);">
-          <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Monto de la Operación</span>
-          <div style="font-size: 2.2rem; font-weight: 800; color: #fff; font-family: var(--font-mono);" id="receiptAmount">$1,850.00 MXN</div>
+        <!-- Telemetry Specs Overlay -->
+        <div class="vehicle-specs-grid">
+          <div class="vehicle-spec-chip">
+            <div style="font-size: 0.72rem; color: var(--lucy-cyan); text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Capacidad Máxima</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; font-family: var(--font-mono); margin-top: 2px;">38 Toneladas</div>
+          </div>
+          <div class="vehicle-spec-chip">
+            <div style="font-size: 0.72rem; color: var(--lucy-pink); text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Velocidad Crucero AV-4</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; font-family: var(--font-mono); margin-top: 2px;">520 km/h (Suborbital)</div>
+          </div>
+          <div class="vehicle-spec-chip">
+            <div style="font-size: 0.72rem; color: var(--lucy-cyan); text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Blindaje Balístico</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; font-family: var(--font-mono); margin-top: 2px;">Tier 6 // Anti-EMP</div>
+          </div>
+          <div class="vehicle-spec-chip">
+            <div style="font-size: 0.72rem; color: var(--matrix-emerald); text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Cifrado Black ICE</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; font-family: var(--font-mono); margin-top: 2px;">Inviolable 100%</div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="receipt-row">
-          <span class="receipt-label">Clave de Rastreo Banxico:</span>
-          <span class="receipt-val" id="receiptTrackingKey">20261002045612874563024018</span>
-        </div>
-
-        <div class="receipt-row">
-          <span class="receipt-label">Fecha y Hora de Liquidación:</span>
-          <span class="receipt-val" id="receiptDate">02/10/2026 14:40:18 hrs</span>
-        </div>
-
-        <div class="receipt-row">
-          <span class="receipt-label">Cuenta Ordenante:</span>
-          <span class="receipt-val" id="receiptOrigin">Tu Cuenta MIAUBANK (CLABE ...8123)</span>
-        </div>
-
-        <div class="receipt-row">
-          <span class="receipt-label">Cuenta Beneficiario:</span>
-          <span class="receipt-val" id="receiptBeneficiary">Sofía Garza (CLABE ...4592)</span>
-        </div>
-
-        <div class="receipt-row">
-          <span class="receipt-label">Institución Receptora:</span>
-          <span class="receipt-val" id="receiptInstitution">Banorte</span>
-        </div>
-
-        <div class="receipt-row">
-          <span class="receipt-label">Concepto de Pago:</span>
-          <span class="receipt-val" id="receiptConcept">Cena Masaryk fin de semana</span>
-        </div>
-
-        <div class="spei-watermark">
-          Este comprobante avala la transferencia a través del Sistema de Pagos Electrónicos Interbancarios (SPEI) de Banco de México con sello digital verificado.
+    <!-- Bento Grid: Details of Transport Capabilities -->
+    <div class="bento-grid" id="servicios">
+      
+      <!-- Bento Card 1: Heavy Haulers -->
+      <div class="glass-card bento-col-8">
+        <div class="bento-card-inner">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div class="bento-icon-box" style="color: var(--lucy-cyan);">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 3h15v13H1z"></path>
+                  <path d="M16 8h4l3 3v5h-7V8z"></path>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              </div>
+              <span class="badge-neon badge-cyan">PROPULSIÓN HÍBRIDA 8X8</span>
+            </div>
+            <h3 class="bento-title">Camiones Blindados RYO Heavy Hauler</h3>
+            <p class="bento-text">
+              Unidades terrestres con chasis reforzado de titanio y grafeno multicapa. Diseñadas para resistir proyectiles balísticos pesados y pulsos electromagnéticos en los corredores de Night City.
+            </p>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--border-subtle);">
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--lucy-cyan);">● Aceleración Turbo: 0 a 100 en 4.2s</div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">● Encriptación ICE Nivel Militar</div>
+          </div>
         </div>
       </div>
 
-      <div style="display: flex; gap: 12px; margin-top: 18px;">
-        <button type="button" class="btn-primary-ios" onclick="App.printSPEIReceipt()" style="margin-top: 0;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 6 2 18 2 18 9"/>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-            <rect x="6" y="14" width="12" height="8"/>
+      <!-- Bento Card 2: AV-4 Suborbital Aerodynes -->
+      <div class="glass-card bento-col-4">
+        <div class="bento-card-inner">
+          <div>
+            <div class="bento-icon-box" style="color: var(--lucy-pink);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+              </svg>
+            </div>
+            <h3 class="bento-title">Aerodinos AV-4 Kusanagi VIP</h3>
+            <p class="bento-text">
+              Vuelos suborbitales directos hacia los helipuertos de Corpo Plaza o la Estación Orbital en menos de 10 minutos.
+            </p>
+          </div>
+          <a href="#cotizador" class="nav-link" style="font-size: 0.85rem; font-weight: 700; color: var(--lucy-pink);">Cotizar Vuelo AV ➔</a>
+        </div>
+      </div>
+
+      <!-- Bento Card 3: Trauma Team Spec Cryo-Protect -->
+      <div class="glass-card bento-col-4">
+        <div class="bento-card-inner">
+          <div>
+            <div class="bento-icon-box" style="color: var(--lucy-cyan);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+                <path d="m4.93 4.93 4.24 4.24"></path>
+                <path d="m14.83 9.17 4.24-4.24"></path>
+                <path d="m14.83 14.83 4.24 4.24"></path>
+                <path d="m4.93 19.07 4.24-4.24"></path>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="bento-title">Crio-Inmersión Trauma Spec</h3>
+            <p class="bento-text">
+              Contenedores herméticos a -80°C con líquido refrigerante dieléctrico para conservar cyberware biológico y chips de neurodatos.
+            </p>
+          </div>
+          <span class="badge-neon badge-cyan" style="align-self: flex-start;">CERTIFICADO TRAUMA TEAM</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 4: Badlands Armored Convoys -->
+      <div class="glass-card bento-col-4">
+        <div class="bento-card-inner">
+          <div>
+            <div class="bento-icon-box" style="color: var(--matrix-emerald);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              </svg>
+            </div>
+            <h3 class="bento-title">Rutas Nomad Badlands</h3>
+            <p class="bento-text">
+              Conexión directa entre los clanes Aldecaldos y las megacorporaciones de Night City cruzando el desierto con escolta blindada pesada.
+            </p>
+          </div>
+          <span style="font-size: 0.85rem; color: var(--text-secondary); font-family: var(--font-mono);">Blindaje Anti-EMP Nivel 6</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 5: Deep-Net Storage Vaults -->
+      <div class="glass-card bento-col-4">
+        <div class="bento-card-inner">
+          <div>
+            <div class="bento-icon-box" style="color: var(--lucy-violet);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="bento-title">Bóvedas Subterráneas ICE</h3>
+            <p class="bento-text">
+              Almacenes bajo tierra en Watson y Santo Domingo desconectados de la red pública para salvaguardar cargamentos valiosos.
+            </p>
+          </div>
+          <span class="badge-neon badge-violet" style="align-self: flex-start;">PROTEGIDO CONTRA NETRUNNERS</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE NIGHT CITY MAP (CANVAS)
+       ========================================================================== -->
+  <section class="section-container" id="red-global">
+    <div class="section-header">
+      <span class="section-tag">// MAPA DE DISTRITOS DE NIGHT CITY</span>
+      <h2 class="section-heading">Red y corredores logísticos interurbanos.</h2>
+      <p class="section-description">
+        Monitoreo en vivo de los convoys desplazándose entre Watson, City Center, Heywood, Westbrook, Pacifica y los Badlands.
+      </p>
+    </div>
+
+    <div class="network-canvas-container">
+      <canvas id="map-network-canvas"></canvas>
+      
+      <!-- Overlay HUD Info -->
+      <div class="map-floating-overlay">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--lucy-cyan); display: inline-block;"></span>
+          <span style="color: #fff; font-weight: 700;">Corredor Netrunner Cyan</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--lucy-pink); display: inline-block;"></span>
+          <span style="color: #fff; font-weight: 700;">Vector Aéreo AV-4</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--lucy-violet); display: inline-block;"></span>
+          <span style="color: #fff; font-weight: 700;">Convoy Blindado Badlands</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECURITY & TRUST BADGES
+       ========================================================================== -->
+  <section class="section-container" style="padding-top: 30px; padding-bottom: 60px;">
+    <div class="glass-panel" style="padding: 48px; text-align: center; border-color: var(--border-cyan);">
+      <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Protocolos de Seguridad Nivel Corpo</h3>
+      <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto 36px;">
+        Garantizamos que tu carga llega a su destino sin ser interceptada ni intervenida en los checkpoints de Night City.
+      </p>
+
+      <div style="display: flex; justify-content: center; align-items: center; gap: 36px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.95rem;">
+          <span style="color: var(--lucy-cyan);">⚡</span> Monowire & ICE Sync
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.95rem;">
+          <span style="color: var(--lucy-pink);">🛡️</span> Black ICE Anti-Hack 100%
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.95rem;">
+          <span style="color: var(--matrix-emerald);">🔒</span> Blindaje Mackinaw Nivel 6
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.95rem;">
+          <span style="color: var(--lucy-lavender);">🌙</span> Conexión Orbital Luna Spec
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MODAL: RESERVA Y GENERACIÓN DE VOUCHER DIGITAL NIGHT CITY
+       ========================================================================== -->
+  <div class="cyber-modal-overlay" id="booking-modal-overlay">
+    <div class="cyber-modal">
+      <button class="modal-close-btn" id="btn-close-modal" aria-label="Cerrar">✕</button>
+
+      <!-- Step 1: Form View -->
+      <div id="modal-form-view">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+          <span class="badge-neon badge-cyan">CONTRATO EN CURSO</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">NIGHT CITY DISPATCH</span>
+        </div>
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Asignar Unidad de Despacho</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">
+          Ingresa tus datos o los de tu Fixer para generar la orden de recogida inmediata.
+        </p>
+
+        <form id="booking-dispatch-form">
+          <div class="form-group">
+            <label class="form-label"><span>Nombre o Alias de Contacto</span></label>
+            <input type="text" id="book-name" class="cyber-input" placeholder="Ej. David Martinez / Lucy" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label"><span>Tripulación / Corporación</span></label>
+              <input type="text" id="book-company" class="cyber-input" placeholder="Ej. Edgerunner Crew / Arasaka" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Holollamada / Comlink</span></label>
+              <input type="tel" id="book-phone" class="cyber-input" placeholder="+2077 555-SANDY" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><span>Enlace Neural / Correo</span></label>
+            <input type="email" id="book-email" class="cyber-input" placeholder="lucy@edgerunner.nc" required>
+          </div>
+
+          <div id="gpay-container" style="margin-top: 16px; width: 100%; display: flex; justify-content: center;">
+            <!-- GPay button gets injected here -->
+          </div>
+
+          <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+            🔒 Pago procesado por GPay. Requiere inicio de sesión.
+          </p>
+        </form>
+      </div>
+
+      <!-- Step 2: Voucher Success View -->
+      <div id="modal-success-view" style="display: none; text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 240, 255, 0.15); border: 2px solid var(--lucy-cyan); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: var(--lucy-cyan);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
           </svg>
-          Imprimir / Guardar PDF
-        </button>
-        <button type="button" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-medium); color: #fff; padding: 12px 18px; border-radius: var(--radius-pill); cursor: pointer; font-weight: 600;" onclick="App.closeModal('speiReceiptModal')">
-          Cerrar
-        </button>
+        </div>
+
+        <h3 style="font-size: 1.7rem; font-weight: 800; color: #fff; margin-bottom: 6px;">¡Despacho Confirmado!</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+          La unidad de transporte ha iniciado el vector hacia tu posición en Night City.
+        </p>
+
+        <!-- Simulated Holographic QR Ticket -->
+        <div class="ticket-qr-container">
+          <div>
+            <div id="success-ticket-id" style="font-family: var(--font-mono); font-size: 1.45rem; font-weight: 800; color: var(--lucy-cyan); letter-spacing: 0.08em; margin-bottom: 4px;">
+              NIGHTCITY-902814
+            </div>
+            <div id="success-client-info" style="font-size: 0.85rem; color: #fff; margin-bottom: 8px;">
+              David Martinez • Lucy Kushinada
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 16px;">
+              Total: <span id="success-total-val" style="color: var(--lucy-cyan);">$16,305.70 MXN</span>
+            </div>
+
+            <!-- SVG QR Mockup with Cyan & Magenta Glow -->
+            <svg width="130" height="130" viewBox="0 0 100 100" style="background: #fff; padding: 8px; border-radius: 12px; margin: 0 auto; display: block;">
+              <rect width="30" height="30" fill="#000"/>
+              <rect x="5" y="5" width="20" height="20" fill="#fff"/>
+              <rect x="10" y="10" width="10" height="10" fill="#000"/>
+              <rect x="70" y="0" width="30" height="30" fill="#000"/>
+              <rect x="75" y="5" width="20" height="20" fill="#fff"/>
+              <rect x="80" y="10" width="10" height="10" fill="#000"/>
+              <rect x="0" y="70" width="30" height="30" fill="#000"/>
+              <rect x="5" y="75" width="20" height="20" fill="#fff"/>
+              <rect x="10" y="80" width="10" height="10" fill="#000"/>
+              <rect x="40" y="20" width="10" height="30" fill="#000"/>
+              <rect x="60" y="45" width="25" height="10" fill="#000"/>
+              <rect x="35" y="70" width="15" height="25" fill="#000"/>
+              <rect x="65" y="75" width="20" height="15" fill="#000"/>
+            </svg>
+
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--lucy-cyan); margin-top: 10px;">
+              BLACK ICE VERIFICADO // LUCY NETRUNNER PROTOCOL
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button id="btn-print-voucher" class="btn-cyber-primary" style="flex: 1; padding: 12px;">
+            <span>Guardar Pase en PDF</span>
+          </button>
+          <button onclick="document.getElementById('btn-close-modal').click();" class="btn-cyber-secondary" style="flex: 1; padding: 12px;">
+            <span>Cerrar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER (NIGHT CITY EDITION - LUCY THEME)
+       ========================================================================== -->
+  <footer class="footer-cyber">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="nav-logo" style="margin-bottom: 16px;">
+          <div class="nav-logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <span>LUCY<span style="color: var(--lucy-cyan);">FREIGHT</span></span>
+        </a>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; max-width: 360px;">
+          Red logística de alta velocidad en Night City inspirada en el anime Cyberpunk: Edgerunners, con la precisión, limpieza y ergonomía de diseño de Apple.
+        </p>
       </div>
 
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Transporte Sandevistan Turbo</a></li>
+          <li><a href="#servicios">Aerodinos AV-4 Suborbital</a></li>
+          <li><a href="#servicios">Crio-Inmersión Trauma Spec</a></li>
+          <li><a href="#servicios">Convoys Blindados Badlands</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Distritos Conectados</h4>
+        <ul>
+          <li><a href="#rastreo">Watson & Kabuki Market</a></li>
+          <li><a href="#cotizador">Santo Domingo & Arroyo</a></li>
+          <li><a href="#red-global">Corpo Plaza & City Center</a></li>
+          <li><a href="#red-global">Badlands Nomad Highway</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Comlink & Contacto</h4>
+        <ul>
+          <li><span style="color: var(--text-secondary); font-size: 0.88rem;">Línea de Emergencia 24/7</span></li>
+          <li><span style="color: var(--edgerunner-yellow); font-family: var(--font-mono); font-size: 0.88rem;">+2077 (55) SANDEV-NC</span></li>
+          <li><span style="color: var(--text-secondary); font-size: 0.88rem;">dispatch@edgerunner.nc</span></li>
+          <li><span style="color: var(--matrix-green); font-size: 0.78rem; font-family: var(--font-mono);">ICE STATUS: MÁXIMA SEGURIDAD</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2077 EDGERUNNER Freight Logistics Inc. Night City. Diseñado con ergonomía Apple.</div>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">Cifrado Black ICE</a>
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">Contratos de Mercenarios</a>
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">SLA 99.9%</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       AUTH & PROFILE MODALS
+       ========================================================================== -->
+  
+  <!-- Overlay Genérico para Modales Auth -->
+  <div class="cyber-modal-overlay" id="auth-modal-overlay">
+    <div class="cyber-modal">
+      <button class="modal-close-btn" onclick="closeAuthModal()" aria-label="Cerrar">✕</button>
+
+      <!-- LOGIN VIEW -->
+      <div id="login-view">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Conexión Segura (Log-In)</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">Acceso a la red logística de Night City.</p>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label"><span>Usuario / Alias</span></label>
+            <input type="text" id="login-user" class="cyber-input" placeholder="Ej. david_martinez" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span>Contraseña (ICE Key)</span></label>
+            <input type="password" id="login-pass" class="cyber-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-cyber-primary" style="width: 100%; margin-top: 12px; padding: 15px;">
+            <span>Conectar a la Red</span>
+          </button>
+        </form>
+        
+        <p style="text-align:center; margin-top:16px; font-size:0.85rem; color: var(--text-muted);">
+          ¿No tienes acceso? <a href="#" onclick="document.getElementById('login-view').style.display='none'; document.getElementById('register-view').style.display='block';" style="color:var(--lucy-cyan);">Regístrate aquí</a>
+        </p>
+      </div>
+
+      <!-- REGISTER VIEW -->
+      <div id="register-view" style="display:none;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Crear Perfil en la Red</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">Registra tu corporación o equipo mercenario.</p>
+        
+        <form id="register-form">
+          <div class="form-group">
+            <label class="form-label"><span>Usuario / Alias</span></label>
+            <input type="text" id="reg-user" class="cyber-input" placeholder="Ej. david_martinez" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span>Contraseña (ICE Key)</span></label>
+            <input type="password" id="reg-pass" class="cyber-input" placeholder="••••••••" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span>Domicilio en Night City</span></label>
+            <input type="text" id="reg-domicilio" class="cyber-input" placeholder="Ej. Megabuilding H4, Apt 0402" required>
+          </div>
+          <button type="submit" class="btn-cyber-primary" style="width: 100%; margin-top: 12px; padding: 15px;">
+            <span>Crear Perfil Segregado</span>
+          </button>
+        </form>
+        
+        <p style="text-align:center; margin-top:16px; font-size:0.85rem; color: var(--text-muted);">
+          ¿Ya tienes acceso? <a href="#" onclick="document.getElementById('register-view').style.display='none'; document.getElementById('login-view').style.display='block';" style="color:var(--lucy-cyan);">Conéctate</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DE CLIENTE -->
+  <div class="cyber-modal-overlay" id="client-panel-overlay">
+    <div class="cyber-modal" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeAuthModal()" aria-label="Cerrar">✕</button>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff;">Panel de Cliente</h3>
+        <button class="btn-cyber-secondary btn-logout" style="padding: 6px 12px; font-size: 0.8rem;">Desconectar</button>
+      </div>
+      
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+        <p style="color: var(--text-secondary); margin-bottom: 4px; font-size:0.85rem;">Usuario / Alias</p>
+        <p id="cp-username" style="color: #fff; font-size: 1.1rem; font-weight: bold; margin-bottom: 12px;">-</p>
+        
+        <p style="color: var(--text-secondary); margin-bottom: 4px; font-size:0.85rem;">Domicilio Registrado</p>
+        <p id="cp-domicilio" style="color: #fff; font-size: 1rem;">-</p>
+      </div>
+      
+      <h4 style="font-size: 1.2rem; color: var(--lucy-cyan); margin-bottom: 12px; font-family: var(--font-mono);">HISTORIAL DE DESPACHOS</h4>
+      <div id="cp-history-list" style="max-height: 250px; overflow-y: auto;">
+        <!-- Filled by auth.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DE ADMIN -->
+  <div class="cyber-modal-overlay" id="admin-panel-overlay">
+    <div class="cyber-modal" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeAuthModal()" aria-label="Cerrar">✕</button>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff;">Centro de Mando (Admin)</h3>
+        <button class="btn-cyber-secondary btn-logout" style="padding: 6px 12px; font-size: 0.8rem;">Desconectar</button>
+      </div>
+      
+      <p style="color: var(--text-secondary); margin-bottom: 24px;">Monitoreo de todos los clientes registrados en la red.</p>
+      
+      <h4 style="font-size: 1.2rem; color: var(--lucy-pink); margin-bottom: 12px; font-family: var(--font-mono);">CLIENTES ACTIVOS</h4>
+      <div id="ap-client-list" style="max-height: 350px; overflow-y: auto;">
+        <!-- Filled by auth.js -->
+      </div>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="js/currency.js"></script>
-  <script src="js/transactions.js"></script>
-  <script src="js/card-security.js"></script>
+  <script src="js/sound-effects.js"></script>
+  <script src="js/canvas-matrix.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/gpay.js"></script>
+  <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 </body>
 </html>
