@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIAUBANK | Banca Privada Digital</title>
+  
+  <!-- Estilos del Sistema Apple Black -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z'/></svg>">
+</head>
+<body>
+
+  <!-- Luz Ambiental de Fondo -->
+  <div class="ambient-glow"></div>
+
+  <!-- Dynamic Island (Estilo iPhone 15/16 Pro) -->
+  <div class="dynamic-island-container">
+    <div class="dynamic-island" id="dynamicIsland">
+      <div class="island-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
+        </svg>
+      </div>
+      <div class="island-content">
+        <span class="island-title" id="islandTitle">MIAUBANK Private</span>
+        <span class="island-sub" id="islandSub">Banca Digital Protegida</span>
+      </div>
+      <span class="island-badge" id="islandBadge">ACTIVO</span>
+    </div>
+  </div>
+
+  <div class="app-layout">
+
+    <!-- Header Principal -->
+    <header class="app-header">
+      <div class="brand-wrapper" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="brand-icon">
+          <!-- Silueta Minimalista de Cara de Gato -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">MIAUBANK</span>
+          <span class="brand-tag">Banca Privada</span>
+        </div>
+      </div>
+
+      <!-- Selector Global de Divisas -->
+      <div class="header-actions">
+        <div class="currency-selector-pill">
+          <button class="currency-btn active" data-currency="MXN" onclick="CurrencyEngine.setDisplayMode('MXN')">MXN ($)</button>
+          <button class="currency-btn" data-currency="USD" onclick="CurrencyEngine.setDisplayMode('USD')">USD ($)</button>
+          <button class="currency-btn" data-currency="DUAL" onclick="CurrencyEngine.setDisplayMode('DUAL')">Dual</button>
+        </div>
+
+        <!-- Perfil del Usuario -->
+        <div class="user-profile-badge" title="Cuenta Verificada">
+          <div class="avatar-ring">AT</div>
+          <div class="user-meta">
+            <span class="user-name">Alejandro Tapia</span>
+            <span class="user-status">Face ID Verificado</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de Tipo de Cambio en Vivo -->
+    <div class="fx-ticker-bar">
+      <div class="ticker-left">
+        <span class="live-indicator">
+          <span class="pulse-dot"></span>
+          EN VIVO
+        </span>
+        <span class="ticker-text">Tipo de Cambio Fix Banxico:</span>
+        <span class="ticker-rate-badge" id="fxTickerRate">$1 USD = $17.85 MXN</span>
+      </div>
+      <div class="ticker-right">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Protección IPAB hasta 400,000 UDIS
+        </span>
+        <span>·</span>
+        <span>SPEI Conexión Directa 24/7</span>
+      </div>
+    </div>
+
+    <!-- Grid Principal de la Banca -->
+    <main class="dashboard-grid">
+
+      <!-- COLUMNA IZQUIERDA: Balance, Acciones, Apartados y Movimientos -->
+      <div class="main-column">
+
+        <!-- Tarjeta de Saldo Principal -->
+        <section class="balance-hero">
+          <div class="balance-header-row">
+            <span class="balance-meta-tag">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              Patrimonio Disponible
+            </span>
+
+            <button class="privacy-toggle-btn" onclick="CurrencyEngine.toggleBalanceVisibility()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <span id="privacyBtnText">Ocultar</span>
+            </button>
+          </div>
+
+          <div class="balance-amount-display">
+            <h1 class="main-balance-text" id="mainBalanceAmount">$184,520.50</h1>
+            <span class="currency-code-tag" id="mainCurrencyCode">MXN</span>
+          </div>
+
+          <div class="secondary-balance-row">
+            <span>En dólares:</span>
+            <span class="secondary-balance-value" id="secondaryBalanceAmount">$9,850.00</span>
+            <span id="secondaryCurrencyCode">USD</span>
+            <button class="currency-swap-pill" onclick="App.openModal('fxModal')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"/>
+              </svg>
+              Cambiar
+            </button>
+          </div>
+
+          <!-- Tira de Rendimiento Anual -->
+          <div class="balance-yield-strip">
+            <div class="yield-info-left">
+              <div class="yield-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+              <div>
+                <div class="yield-text-main">Rendimiento Cuentas a la Vista</div>
+                <div class="yield-text-sub" id="dailyYieldAmount">+ $72.03 MXN generados hoy</div>
+              </div>
+            </div>
+            <div class="yield-rate-badge">14.25% ANUAL</div>
+          </div>
+        </section>
+
+        <!-- Barra de Acciones Rápidas -->
+        <section class="quick-actions-grid">
+          <button class="quick-action-btn" onclick="App.openModal('transferModal')">
+            <div class="action-icon-wrapper blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </div>
+            <span class="action-title">Transferir (SPEI)</span>
+          </button>
+
+          <button class="quick-action-btn" onclick="App.openModal('depositModal')">
+            <div class="action-icon-wrapper green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </div>
+            <span class="action-title">Ingresar Dinero</span>
+          </button>
+
+          <button class="quick-action-btn" onclick="App.openModal('fxModal')">
+            <div class="action-icon-wrapper purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                <path d="M16 21h5v-5"/>
+              </svg>
+            </div>
+            <span class="action-title">Cambiar MXN / USD</span>
+          </button>
+
+          <button class="quick-action-btn" onclick="App.openModal('servicesModal')">
+            <div class="action-icon-wrapper orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M7 15h0M2 9.5h20"/>
+              </svg>
+            </div>
+            <span class="action-title">Pagar Servicios</span>
+          </button>
+        </section>
+
+        <!-- Bóveda de Apartados y Ahorro -->
+        <section class="glass-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <div class="icon-box">🎯</div>
+              Bóvedas de Ahorro y Metas
+            </h2>
+            <button class="panel-action-btn" onclick="App.depositToVault('Fondo Emergencia', 1000)">
+              + Agregar $1,000 MXN
+            </button>
+          </div>
+
+          <div class="vaults-grid">
+            <div class="vault-card" onclick="App.depositToVault('Fondo Emergencia', 2000)">
+              <div class="vault-top">
+                <div class="vault-title-wrap">
+                  <span class="vault-emoji">🛡️</span>
+                  <span class="vault-name">Fondo de Emergencia</span>
+                </div>
+                <span class="vault-badge">14.25% Rend.</span>
+              </div>
+              <div class="vault-balance-info">
+                <span class="vault-current-amount">$65,000 MXN</span>
+                <span class="vault-goal-amount">Meta: $100,000</span>
+              </div>
+              <div class="vault-progress-track">
+                <div class="vault-progress-bar" style="width: 65%;"></div>
+              </div>
+            </div>
+
+            <div class="vault-card" onclick="App.depositToVault('Viaje a Tokio', 1500)">
+              <div class="vault-top">
+                <div class="vault-title-wrap">
+                  <span class="vault-emoji">🇯🇵</span>
+                  <span class="vault-name">Viaje a Tokio 2027</span>
+                </div>
+                <span class="vault-badge">En Dólares</span>
+              </div>
+              <div class="vault-balance-info">
+                <span class="vault-current-amount">$3,200 USD</span>
+                <span class="vault-goal-amount">Meta: $5,000</span>
+              </div>
+              <div class="vault-progress-track">
+                <div class="vault-progress-bar" style="width: 64%;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Movimientos Recientes -->
+        <section class="glass-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <div class="icon-box">📊</div>
+              Movimientos Recientes
+            </h2>
+          </div>
+
+          <!-- Filtros de Transacciones -->
+          <div class="tx-filters-bar">
+            <div class="filter-pills">
+              <button class="tx-filter-btn active" data-filter="ALL" onclick="TransactionsEngine.setFilter('ALL')">Todas</button>
+              <button class="tx-filter-btn" data-filter="MXN" onclick="TransactionsEngine.setFilter('MXN')">Pesos (MXN)</button>
+              <button class="tx-filter-btn" data-filter="USD" onclick="TransactionsEngine.setFilter('USD')">Dólares (USD)</button>
+              <button class="tx-filter-btn" data-filter="INCOME" onclick="TransactionsEngine.setFilter('INCOME')">Ingresos</button>
+              <button class="tx-filter-btn" data-filter="EXPENSE" onclick="TransactionsEngine.setFilter('EXPENSE')">Gastos</button>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-secondary);">Toca un movimiento para ver comprobante CEP</span>
+          </div>
+
+          <!-- Lista de Transacciones Renderizada -->
+          <div class="tx-list-container" id="transactionsList">
+            <!-- Rellenado por transactions.js -->
+          </div>
+        </section>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: Tarjeta Apple Card 3D, Seguridad y Métricas -->
+      <aside class="sidebar-column">
+
+        <!-- Módulo de Tarjetas Interactivas Apple Card -->
+        <section class="glass-panel cards-section-container">
+          <div class="panel-header" style="margin-bottom: 8px;">
+            <h2 class="panel-title">
+              <div class="icon-box">💳</div>
+              Mis Tarjetas
+            </h2>
+          </div>
+
+          <!-- Pestañas Física / Virtual -->
+          <div class="card-type-tabs">
+            <button class="card-tab-btn active" data-card-type="physical" onclick="CardSecurityEngine.switchCard('physical')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+              Titanium Black
+            </button>
+            <button class="card-tab-btn" data-card-type="virtual" onclick="CardSecurityEngine.switchCard('virtual')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 3a9 9 0 0 1 9 9"/>
+              </svg>
+              Aurora Virtual
+            </button>
+          </div>
+
+          <!-- Escenario 3D de la Tarjeta Apple -->
+          <div class="card-perspective-wrapper" id="cardPerspectiveWrapper">
+            <div class="apple-card titanium-black" id="mainAppleCard" onclick="CardSecurityEngine.requestRevealDetails()">
+              
+              <!-- Reflejo Holográfico (Sheen) -->
+              <div class="card-glare"></div>
+
+              <!-- Contenido de la Tarjeta -->
+              <div class="card-content">
+                <div class="card-top-row">
+                  <div class="card-bank-mark">
+                    <span class="card-aura-logo">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 2px;">
+                        <path d="M4 4l4.5 4.5c1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5L20 4c1.2 4 1.5 6.5 1.5 9 0 4.8-4.3 8-9.5 8S2.5 17.8 2.5 13c0-2.5.3-5 1.5-9z"/>
+                      </svg>
+                      MIAUBANK
+                    </span>
+                    <span class="card-tier-label" id="cardTierLabel">Private Banking</span>
+                  </div>
+                  <div class="card-nfc-chip">
+                    <div class="contactless-wave">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M8.5 16.5a5 5 0 0 1 0-7"/>
+                        <path d="M12 19a8.5 8.5 0 0 0 0-14"/>
+                        <path d="M15.5 21.5a12 12 0 0 0 0-19"/>
+                      </svg>
+                    </div>
+                    <div class="emv-chip"></div>
+                  </div>
+                </div>
+
+                <div class="card-number-row" id="cardNumberDisplay">
+                  <div class="card-number-hidden">
+                    <span class="number-dots">•••• •••• ••••</span>
+                    <span class="number-last4">7890</span>
+                  </div>
+                </div>
+
+                <div class="card-bottom-row">
+                  <div class="card-holder-group">
+                    <span class="card-label-tiny">Titular</span>
+                    <span class="card-holder-name" id="cardHolderName">ALEJANDRO TAPIA</span>
+                  </div>
+
+                  <div class="card-security-meta">
+                    <div class="card-expiry-box">
+                      <span class="card-label-tiny">Expira</span>
+                      <span class="card-meta-value" id="cardExpiryValue">••/••</span>
+                    </div>
+
+                    <div class="card-cvv-box">
+                      <span class="card-label-tiny">CVV</span>
+                      <span class="card-meta-value" id="cardCvvValue">•••</span>
+                    </div>
+
+                    <div class="card-network-logo">
+                      <div class="mastercard-circles">
+                        <div class="mc-circle-red"></div>
+                        <div class="mc-circle-yellow"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Controles de la Tarjeta -->
+          <div class="card-controls-panel">
+            <button class="card-action-button" onclick="CardSecurityEngine.requestRevealDetails()">
+              <div class="card-action-info">
+                <div class="action-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+                <div class="action-text-group">
+                  <span class="action-main-text" id="revealDetailsBtnText">Ver datos y CVV</span>
+                  <span class="action-sub-text" id="cardCvvTimer">Protegido Face ID</span>
+                </div>
+              </div>
+            </button>
+
+            <div class="card-action-button" onclick="CardSecurityEngine.toggleLockCard()">
+              <div class="card-action-info">
+                <div class="action-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <div class="action-text-group">
+                  <span class="action-main-text">Congelar</span>
+                  <span class="action-sub-text">Bloqueo al instante</span>
+                </div>
+              </div>
+              <label class="ios-switch" onclick="event.stopPropagation()">
+                <input type="checkbox" id="cardLockSwitch" onchange="CardSecurityEngine.toggleLockCard()">
+                <span class="ios-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- CLABE Interbancaria con Copiado en un Clic -->
+          <div class="clabe-box" onclick="CardSecurityEngine.copyCLABE()">
+            <div class="clabe-info">
+              <span class="clabe-title">CLABE Interbancaria (SPEI México)</span>
+              <span class="clabe-digits">646 180 1570 2394 8123</span>
+            </div>
+            <div class="clabe-copy-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copiar
+            </div>
+          </div>
+
+          <!-- Copiar Número de Tarjeta -->
+          <div class="clabe-box" style="margin-top: -8px;" onclick="CardSecurityEngine.copyCardNumber()">
+            <div class="clabe-info">
+              <span class="clabe-title">Número de Tarjeta Frecuente</span>
+              <span class="clabe-digits">4829 •••• •••• 7890</span>
+            </div>
+            <div class="clabe-copy-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copiar
+            </div>
+          </div>
+        </section>
+
+        <!-- Distribución de Gastos (Estilo Apple Wallet) -->
+        <section class="glass-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <div class="icon-box">📈</div>
+              Gastos del Mes
+            </h2>
+            <span style="font-size: 0.8rem; color: var(--apple-blue); font-weight: 600;">Octubre 2026</span>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;">$4,288.50 <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 600;">MXN</span></div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary);">+ $124.50 USD en suscripciones internacionales</div>
+          </div>
+
+          <!-- Barra de Segmentos Wallet (Colores Fríos Minimalistas) -->
+          <div style="height: 8px; display: flex; gap: 4px; border-radius: 6px; overflow: hidden; margin-bottom: 16px;">
+            <div style="width: 42%; background: var(--cool-cyan); border-radius: 4px;" title="Servicios y Cloud (42%)"></div>
+            <div style="width: 28%; background: var(--cool-indigo); border-radius: 4px;" title="Transferencias (28%)"></div>
+            <div style="width: 18%; background: var(--cool-steel); border-radius: 4px;" title="Alimentos (18%)"></div>
+            <div style="width: 12%; background: var(--cool-teal); border-radius: 4px;" title="Otros (12%)"></div>
+          </div>
+
+          <!-- Leyendas de Categorías -->
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.78rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-cyan);"></span>
+                Servicios Cloud & Tech
+              </span>
+              <span style="font-weight: 600; color: #fff;">$124.50 USD</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-indigo);"></span>
+                Transferencias Familia/Amigos
+              </span>
+              <span style="font-weight: 600; color: #fff;">$1,850.00 MXN</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary);">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cool-steel);"></span>
+                Entretenimiento y Servicios
+              </span>
+              <span style="font-weight: 600; color: #fff;">$449.00 MXN</span>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+
+    </main>
+
+  </div>
+
+  <!-- ======================================================================
+       MODALES INTERACTIVOS
+       ====================================================================== -->
+
+  <!-- MODAL: TRANSFERENCIA SPEI -->
+  <div class="modal-overlay" id="transferModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="App.closeModal('transferModal')">✕</button>
+      
+      <h3 class="modal-title">Transferencia SPEI</h3>
+      <p class="modal-subtitle">Envío interbancario instantáneo 24/7 sin comisión</p>
+
+      <form id="transferForm" onsubmit="App.handleTransferSubmit(event)">
+
+        <!-- Contactos Rápidos -->
+        <div class="form-group">
+          <label class="form-label">Contactos Frecuentes</label>
+          <div class="frequent-contacts-scroll" id="quickContactsList">
+            <!-- Inyectado por app.js -->
+          </div>
+        </div>
+
+        <!-- Selector de Moneda de Envío -->
+        <div class="form-group">
+          <label class="form-label">Moneda de Envío</label>
+          <div class="currency-segmented-control">
+            <label class="seg-btn active">
+              <input type="radio" name="transferCurrency" value="MXN" checked style="display:none;" onchange="this.parentElement.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); this.parentElement.classList.add('active');">
+              Pesos Mexicanos (MXN)
+            </label>
+            <label class="seg-btn">
+              <input type="radio" name="transferCurrency" value="USD" style="display:none;" onchange="this.parentElement.parentElement.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active')); this.parentElement.classList.add('active');">
+              Dólares (USD Wire)
+            </label>
+          </div>
+        </div>
+
+        <!-- Monto -->
+        <div class="form-group">
+          <label class="form-label">Monto a Transferir</label>
+          <div class="amount-input-wrapper">
+            <span class="amount-currency-symbol">$</span>
+            <input type="number" step="0.01" min="1" id="transferAmount" class="form-input amount-input-field" placeholder="0.00" required>
+          </div>
+        </div>
+
+        <!-- Destinatario / CLABE -->
+        <div class="form-group">
+          <label class="form-label">CLABE (18 dígitos) o Tarjeta Débito</label>
+          <input type="text" id="transferDestination" class="form-input" placeholder="Ej. 012180015582910482" required maxlength="18">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">Nombre del Titular</label>
+            <input type="text" id="transferBeneficiaryName" class="form-input" placeholder="Nombre completo" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banco Receptor</label>
+            <input type="text" id="transferBankName" class="form-input" placeholder="BBVA, Banorte, Nu, etc." required>
+          </div>
+        </div>
+
+        <!-- Concepto -->
+        <div class="form-group">
+          <label class="form-label">Concepto de Pago</label>
+          <input type="text" id="transferConcept" class="form-input" placeholder="Ej. Pago de renta, cena, etc." required>
+        </div>
+
+        <button type="submit" class="btn-primary-ios">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="7" y1="17" x2="17" y2="7"/>
+            <polyline points="7 7 17 7 17 17"/>
+          </svg>
+          Confirmar y Enviar SPEI
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: INGRESAR DINERO / DATOS DE CUENTA -->
+  <div class="modal-overlay" id="depositModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="App.closeModal('depositModal')">✕</button>
+
+      <h3 class="modal-title">Ingresar Fondos</h3>
+      <p class="modal-subtitle">Transfiere desde cualquier banco mexicano o deposita en efectivo</p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="clabe-box" onclick="CardSecurityEngine.copyCLABE()">
+          <div class="clabe-info">
+            <span class="clabe-title">CLABE SPEI Personal</span>
+            <span class="clabe-digits">646 180 1570 2394 8123</span>
+            <span style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px;">Banco Receptor: STP / MIAUBANK · Titular: Alejandro Tapia</span>
+          </div>
+          <div class="clabe-copy-tag">Copiar</div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; text-align: center;">
+          <div style="font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: #fff;">Depósito en Efectivo OXXO Pay</div>
+          <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 12px;">Muestra este código de barras en caja de cualquier OXXO</div>
+          <div style="font-family: var(--font-mono); font-size: 1.3rem; letter-spacing: 0.15em; font-weight: 800; color: var(--apple-blue); background: rgba(10, 132, 255, 0.1); padding: 10px; border-radius: 8px; border: 1px dashed var(--apple-blue);">
+            9384 1029 4812 0041
+          </div>
+          <div style="font-size: 0.68rem; color: var(--text-tertiary); margin-top: 8px;">Acreditación inmediata · Comisión OXXO $15 MXN</div>
+        </div>
+
+        <button type="button" class="btn-primary-ios" onclick="App.closeModal('depositModal')">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CAMBIO DE DIVISAS (FX MXN <-> USD) -->
+  <div class="modal-overlay" id="fxModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="App.closeModal('fxModal')">✕</button>
+
+      <h3 class="modal-title">Cambio de Divisas</h3>
+      <p class="modal-subtitle">Conversión instantánea entre tus cuentas en MXN y USD</p>
+
+      <form id="fxForm" onsubmit="App.handleFXSubmit(event)">
+        
+        <!-- De (Origen) -->
+        <div class="form-group">
+          <label class="form-label" id="fxFromCurrencyLabel">Pesos Mexicanos (MXN)</label>
+          <div class="amount-input-wrapper">
+            <span class="amount-currency-symbol" id="fxFromSymbol">$</span>
+            <input type="number" step="0.01" min="1" id="fxFromAmount" class="form-input amount-input-field" placeholder="10,000.00" required>
+          </div>
+        </div>
+
+        <!-- Botón de Invertir Dirección -->
+        <div style="display: flex; justify-content: center; margin: -6px 0 10px 0;">
+          <button type="button" id="fxSwapDirectionBtn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-medium); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--apple-blue); cursor: pointer; transition: transform 0.3s;" title="Invertir conversión">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- A (Destino Calculado) -->
+        <div class="form-group">
+          <label class="form-label" id="fxToCurrencyLabel">Dólares Estadounidenses (USD)</label>
+          <div class="amount-input-wrapper">
+            <span class="amount-currency-symbol" id="fxToSymbol">$</span>
+            <input type="text" id="fxToAmount" class="form-input amount-input-field" placeholder="0.00" readonly style="color: var(--apple-green);">
+          </div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 16px; font-size: 0.78rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span style="color: var(--text-secondary);">Cotización en vivo:</span>
+            <span style="font-weight: 700; color: #fff;" id="fxModalRateInfo">1 USD = $17.85 MXN</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-secondary);">Comisión por operación:</span>
+            <span style="font-weight: 700; color: var(--cool-teal);">0% Gratis (Spread MIAUBANK)</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-ios">
+          Confirmar Conversión Instantánea
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: PAGAR SERVICIOS -->
+  <div class="modal-overlay" id="servicesModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="App.closeModal('servicesModal')">✕</button>
+
+      <h3 class="modal-title">Pago de Servicios</h3>
+      <p class="modal-subtitle">Liquida recibos oficiales sin filas y con comprobante fiscal</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="card-action-button" onclick="App.handlePayService('CFE Electricidad', 784.00)">
+          <div class="card-action-info">
+            <div class="action-icon-circle" style="background: rgba(45, 212, 191, 0.12); color: var(--cool-teal);">⚡</div>
+            <div class="action-text-group">
+              <span class="action-main-text">CFE Electricidad</span>
+              <span class="action-sub-text">Recibo bimestral vencimiento próx.</span>
+            </div>
+          </div>
+          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$784.00 MXN</span>
+        </div>
+
+        <div class="card-action-button" onclick="App.handlePayService('Telmex Infinitum', 549.00)">
+          <div class="card-action-info">
+            <div class="action-icon-circle" style="background: rgba(56, 189, 248, 0.12); color: var(--cool-cyan);">🌐</div>
+            <div class="action-text-group">
+              <span class="action-main-text">Telmex Fibra Óptica</span>
+              <span class="action-sub-text">Internet y telefonía</span>
+            </div>
+          </div>
+          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$549.00 MXN</span>
+        </div>
+
+        <div class="card-action-button" onclick="App.handlePayService('Tag Pase / Autopistas', 500.00)">
+          <div class="card-action-info">
+            <div class="action-icon-circle" style="background: rgba(148, 163, 184, 0.12); color: var(--cool-steel);">🚗</div>
+            <div class="action-text-group">
+              <span class="action-main-text">Tag PASE Peajes</span>
+              <span class="action-sub-text">Recarga de saldo para casetas</span>
+            </div>
+          </div>
+          <span style="font-weight: 700; color: #fff; font-size: 0.9rem;">$500.00 MXN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FACE ID HUD SIMULACIÓN -->
+  <div class="modal-overlay" id="faceIdModal">
+    <div class="modal-dialog" style="max-width: 320px; text-align: center; background: rgba(15, 16, 21, 0.95);">
+      <div class="face-id-hud">
+        <div class="face-id-frame">
+          <div class="face-id-bracket"></div>
+          <svg class="face-id-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke-width="2"/>
+            <path d="M9 10h.01M15 10h.01M9 15c1 1 2 1.5 3 1.5s2-.5 3-1.5" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="face-id-status" id="faceIdStatusText">Verificando Face ID...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COMPROBANTE OFICIAL CEP SPEI BANXICO -->
+  <div class="modal-overlay" id="speiReceiptModal">
+    <div class="modal-dialog" style="max-width: 520px;">
+      <button class="modal-close-btn" onclick="App.closeModal('speiReceiptModal')">✕</button>
+
+      <div class="spei-receipt-card" id="speiReceiptPrintArea">
+        <div class="spei-receipt-header">
+          <div>
+            <div class="spei-banxico-logo">BANCO DE MÉXICO · SPEI</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 2px;">Comprobante Electrónico (CEP)</div>
+          </div>
+          <span class="spei-status-pill" id="receiptStatus">Liquidado</span>
+        </div>
+
+        <div style="text-align: center; padding: 12px 0; border-bottom: 1px dashed var(--border-subtle);">
+          <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Monto de la Operación</span>
+          <div style="font-size: 2.2rem; font-weight: 800; color: #fff; font-family: var(--font-mono);" id="receiptAmount">$1,850.00 MXN</div>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Clave de Rastreo Banxico:</span>
+          <span class="receipt-val" id="receiptTrackingKey">20261002045612874563024018</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Fecha y Hora de Liquidación:</span>
+          <span class="receipt-val" id="receiptDate">02/10/2026 14:40:18 hrs</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Cuenta Ordenante:</span>
+          <span class="receipt-val" id="receiptOrigin">Tu Cuenta MIAUBANK (CLABE ...8123)</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Cuenta Beneficiario:</span>
+          <span class="receipt-val" id="receiptBeneficiary">Sofía Garza (CLABE ...4592)</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Institución Receptora:</span>
+          <span class="receipt-val" id="receiptInstitution">Banorte</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="receipt-label">Concepto de Pago:</span>
+          <span class="receipt-val" id="receiptConcept">Cena Masaryk fin de semana</span>
+        </div>
+
+        <div class="spei-watermark">
+          Este comprobante avala la transferencia a través del Sistema de Pagos Electrónicos Interbancarios (SPEI) de Banco de México con sello digital verificado.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-top: 18px;">
+        <button type="button" class="btn-primary-ios" onclick="App.printSPEIReceipt()" style="margin-top: 0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+          Imprimir / Guardar PDF
+        </button>
+        <button type="button" style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-medium); color: #fff; padding: 12px 18px; border-radius: var(--radius-pill); cursor: pointer; font-weight: 600;" onclick="App.closeModal('speiReceiptModal')">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/currency.js"></script>
+  <script src="js/transactions.js"></script>
+  <script src="js/card-security.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
